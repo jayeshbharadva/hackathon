@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="div-main">
+      <h2>Registration Form</h2>
+      <form action="" method="post" name="form" id="form">
+        <label for="cid"> Company Id: </label><br />
+        <input type="text" id="cid" name="cid" /><br />
+        <label for="cname"> Company Name:</label> <br /><input
+          type="text"
+          id="cname"
+          name="cname"
+        /><br />
+        <label for="cemail"> Email: </label><br /><input
+          type="text"
+          name="cemail"
+          id="cemail"
+        /><br />
+        <label for="cpassword"> Password: </label><br />
+        <input
+          autocomplete="off"
+          type="text"
+          name="cpassword"
+          id="cpassword"
+        /><br />
+        <label for="cdescription"> Description: </label><br />
+        <input type="text" name="cdescription" id="cdescription" /><br />
+        <div class="bg-col">
+          <button name="submit" class="submit">submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- <script type = "module">
+    import {savelogindata} from "./companylogin.js";
+    savelogindata();
+</script> -->
+
+    <script src="companysignup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script src="scripts.js"></script>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+</style>
+
+<header>
+  <div id="navigation"></div>
+</header>
+<body>
+    <form id="form" name="form">
+        <label for="pid">ID:</label>
+        <input type="text" id="pid" name="pid" required>
+      
+        <label for="pname">Name:</label>
+        <input type="text" id="pname" name="pname" required>
+      
+        <label for="abstract">Abstract:</label>
+        <input id="abstract" name="abstract" required>
+      
+        <button type="submit">Submit</button>
+      </form>
+
+      <div id="error-message-container"></div>
+      <script src="studentpartinhackathon.js"></script>
+</body>
+</html>

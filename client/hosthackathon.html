@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathon Form</title>
+  
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.field-label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.field-input {
+  width: 200px;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.field-file {
+  margin-top: 5px;
+}
+
+.submit-button {
+  margin-top: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+   <div id = "navigation"></div>
+
+   <h1>HOST HACKATHON</h1>
+   <hr>
+  <form action="" method="post" name="form" id="form">
+    <div class="section">
+      <h2 class="section-title">Section 1: About Hackathon</h2>
+
+      <label class="field-label" for="hname">Id:</label>
+      <input class="field-input" type="text" id="hid" name="hid">
+
+      <label class="field-label" for="hname">Name:</label>
+      <input class="field-input" type="text" id="hname" name="hname">
+
+      <label class="field-label" for="htagline">Tagline:</label>
+      <input class="field-input" type="text" id="htagline" name="htagline">
+
+      <label class="field-label" for="habout">About:</label>
+      <textarea class="field-input" id="habout" name="habout"></textarea>
+
+      <label class="field-label" for="hlevel">Level:</label>
+      <input class="field-input" type="text" id="hlevel" name="hlevel">
+
+      <label class="field-label" for="hprize">Prize:</label>
+      <input class="field-input" type="text" id="hprize" name="hprize">
+
+      <label class="field-label" for="hdescription">Description:</label>
+      <textarea class="field-input" id="hdescription" name="hdescription"></textarea>
+
+      <label class="field-label" for="hpfile">Problem Statement File:</label>
+      <input class="field-file" type="file" id="hpfile" name="hpfile">
+
+      <label class="field-label" for="htech">Tech Involved:</label>
+      <input class="field-input" type="text" id="htech" name="htech">
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Section 2: Hackathon Dates</h2>
+      <label class="field-label" for="odate">Start Date:</label>
+      <input class="field-input" type="date" id="odate" name="odate">
+
+      <label class="field-label" for="cdate">End Date:</label>
+      <input class="field-input" type="date" id="cdate" name="cdate">
+
+      <label class="field-label" for="asdate">Submission Start Date:</label>
+      <input class="field-input" type="date" id="asdate" name="asdate">
+
+      <label class="field-label" for="aldate">Submission Last Date:</label>
+      <input class="field-input" type="date" id="aldate" name="aldate">
+
+      <label class="field-label" for="rdate">Result Date:</label>
+      <input class="field-input" type="date" id="rdate" name="rdate">
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Section 3: Team Details</h2>
+      <label class="field-label" for="htmax">Max Team Size:</label>
+      <input class="field-input" type="number" id="htmax" name="htmax">
+
+      <label class="field-label" for="htmin">Min Team Size:</label>
+      <input class="field-input" type="number" id="htmin" name="htmin">
+    </div>
+
+    <input class="submit-button" type="submit" value="Submit" id="submit">
+  </form>
+
+  <script src = "script.js"></script>
+  <script src="hosthackathon.js"></script>
+</body>
+</html>
