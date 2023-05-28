@@ -6,7 +6,7 @@ console.log(hid);
 
 hackdetails();
 document.getElementById('detail').addEventListener('click', function() {
-    redirectToPage('companystudentdetail.html?hid=' + hid);
+    redirectToPage('companystudentlist.html?hid=' + hid);
 });
 
 function redirectToPage(pageUrl) {

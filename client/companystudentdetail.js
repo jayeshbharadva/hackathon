@@ -1,83 +1,33 @@
-const token = localStorage.getItem('companytoken');
-const urlParams = new URLSearchParams(window.location.search);
-const hid = urlParams.get('hid');
+var urlParams = new URLSearchParams(window.location.search);
+var encodedObject = urlParams.get('data');
+var myObject = JSON.parse(decodeURIComponent(encodedObject));
 
+console.log(myObject);
+snameData =  myObject.snameData;
+pdata = myObject.values;
 
-fetchdata();
+fsubmission = pdata.fsubmission;
+ssubmission = pdata.ssubmission;
 
-async function fetchdata(){
-    try{
-        const response = await fetch(`http://localhost:3007/student/studentinfo`,{
-            method: 'POST',
-            headers:{
-                "Content-Type" : "application/json",
-                "Authorization": 'Bearer ' + token
-            },
-            body:JSON.stringify({hid}),
-        });
-        const data = await response.json();
-        console.log(data);
-        var tabledata = `<ul class="student-list">`;
-
-if (!data) {
-    tabledata += "<h2>no student participated in this hackathon</h2>";
-  } else {
-    // Create an array of promises for concurrent requests
-    const requests = data.map(async (values) => {
-      try {
-        const snameResponse = await fetch(`http://localhost:3007/student/${values.sid}`, {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": 'Bearer ' + token
-          }
-        });
-        const snameData = await snameResponse.json();
-        return { snameData, values };
-      } catch (error) {
-        console.log("Error in fetching sname:", error);
-        return null; // Return null if there's an error
-      }
-    });
-  
-    // Wait for all requests to complete
-    const results = await Promise.all(requests);
-  
-    // Generate the tabledata using the results
-    results.forEach( (result) => {
-      if (result) {
-        const { snameData, values } = result;
-        console.log(values);
-        tabledata += `
-          <li class="student-list-item">
-            <span class="student-name">${snameData.sname}</span> - <span class="problem-name">${values.pname}</span>
-            <a class="details-button" href="#" onclick="showStudentDetails(result)">Details</a>
-          </li>
-        `;
-        console.log();
-      }
-    });
-  }
-          document.getElementById("student").innerHTML = tabledata;
-    }
-    catch{
-        console.log("error in backend api call please check!!!!");
-        console.log(hid);
-    }
+if(fsubmission==undefined){
+    fsubmission = 'not submitted yet!!';
 }
 
-function showStudentDetails(result) {
-  const { snameData, values } = result;
-  console.log('name data',snameData);
-  console.log('values',values);
-  document.getElementById("studentName").textContent = student.name;
-  document.getElementById("problemStatement").textContent = student.problemStatement;
-  document.getElementById("abstract").textContent = student.abstract;
-  document.getElementById("problemName").textContent = student.problemName;
-  document.getElementById("firstSubmission").textContent = student.firstSubmission;
-  document.getElementById("secondSubmission").textContent = student.secondSubmission;
 
-  // Hide student list page and show student details page
-  document.getElementById("studentListPage").style.display = "none";
-  document.getElementById("studentDetailsPage").style.display = "block";
+if(ssubmission==undefined){
+    ssubmission = 'not submitted yet!!';
 }
+
+var data = 
+`<h1>Student Details</h1>
+<div class="student-details">
+  <p><strong>Student Name:</strong>${snameData.sname} <span id="studentName"></span></p>
+  <p><strong>Student Email:</strong>${snameData.semail} <span id="studentEmail"></span></p>
+  <p><strong>Problem Statement ID:</strong>${pdata.pid} <span id="problemStatement"></span></p>
+  <p><strong>Problem Name:</strong> <span id="problemName">${pdata.pname}</span></p>
+  <p><strong>Abstract:</strong>${pdata.abstract} <span id="abstract"></span></p>
+  <p><strong>First Submission:</strong>${fsubmission} <span id="firstSubmission"></span></p>
+  <p><strong>Second Submission:</strong>${ssubmission} <span id="secondSubmission"></span></p>
+</div>`;
+
+document.getElementById('studentDetailsPage').innerHTML = data;

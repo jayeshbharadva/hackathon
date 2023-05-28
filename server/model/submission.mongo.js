@@ -20,6 +20,12 @@ const submissionschema = mongoose.Schema({
     abstract:{
         type:String,
         required:true,
+    },
+    fsubmission:{
+        type: String,
+    },
+    ssubmission:{
+        type: String,
     }
 });
 

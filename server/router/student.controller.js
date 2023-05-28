@@ -82,7 +82,6 @@ async function httpstudentinfo(req,res){
     const {hid} = req.body;
     console.log(hid);
     const r = await studentinfo(hid);
-    console.log('response is this:',r);
     return res.status(200).json(r);
 }
 

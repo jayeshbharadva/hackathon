@@ -17,7 +17,7 @@ function logout(){
       var hname = document.getElementById('hname').value;
       var htagline = document.getElementById('htagline').value;
       var habout = document.getElementById('habout').value;
-      var hlevel = document.getElementById('hlevel').value;
+      var hlevel = document.querySelector('input[name="hlevel"]:checked').value;
       var hprize = document.getElementById('hprize').value;
       var hdescription = document.getElementById('hdescription').value;
       var hpfile = document.getElementById('hpfile').value;
@@ -29,7 +29,48 @@ function logout(){
       var rdate = document.getElementById('rdate').value;
       var htmax = document.getElementById('htmax').value;
       var htmin = document.getElementById('htmin').value;
-  
+      
+      const startDate = new Date(odate);
+  const endDate = new Date(cdate);
+  const submissionStartDate = new Date(asdate);
+  const submissionEndDate = new Date(aldate);
+  const resultDate = new Date(rdate);
+
+  if (endDate <= startDate) {
+    alert('End date should be after the start date.');
+    return; // Stop form submission
+  }
+
+  if (submissionStartDate < startDate || submissionStartDate > endDate) {
+    alert('Submission start date should be between the start and end dates.');
+    return; // Stop form submission
+  }
+
+  if (submissionEndDate < startDate || submissionEndDate > endDate) {
+    alert('Submission end date should be between the start and end dates.');
+    return; // Stop form submission
+  }
+
+  if(!(submissionEndDate > submissionStartDate)){
+    alert('Submission end date should be greater than submission start date');
+    return;
+  }
+
+  if(!(resultDate > endDate)){
+    alert('result date should be after end date');
+    return;
+  }
+
+  if(htmax<=0 || htmin<=0){
+    alert('team size can not be negetive');
+    return;
+  }
+
+  if(htmax < htmin){
+    alert('maximum team size should be greater than minimum');
+    return;
+  }
+
     // Create an object with form values
     var hackathonData = {
         hid,
