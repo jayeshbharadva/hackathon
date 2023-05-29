@@ -1,4 +1,5 @@
 const token = localStorage.getItem('companytoken');
+const hacktable = document.getElementById('hacktable');
 
 checkauthentication();
 
@@ -22,17 +23,11 @@ async function checkauthentication() {
         });
         const res = await response.json();
         const data = res.hack;
-        console.log(data);
-
         let tabledata = "";
         if (!data) {
-            console.log("No data available");
+            hacktable.innerHTML =  `<h2>You have not hosted any hachathon!! host a hackathon</h2>`
         } else {
             const promises = data.map(async (values) => {
-                let date = values.hdates.aldate;
-                date = date.split('T');
-                date = date[0];
-
                 const hid = values.hid;
                 try {
                     const studentresponse = await fetch(`http://localhost:3007/student/studentinfo`, {
@@ -75,7 +70,7 @@ async function checkauthentication() {
                     `;
             });
 
-            document.getElementById("hacktable").innerHTML = tabledata;
+            hacktable.innerHTML = tabledata;
         }
     } catch (err) {
         console.log(err);

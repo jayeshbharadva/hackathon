@@ -80,7 +80,6 @@ async function httppartinhackathon(req,res){
 
 async function httpstudentinfo(req,res){
     const {hid} = req.body;
-    console.log(hid);
     const r = await studentinfo(hid);
     return res.status(200).json(r);
 }

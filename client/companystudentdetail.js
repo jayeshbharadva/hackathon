@@ -1,8 +1,6 @@
 var urlParams = new URLSearchParams(window.location.search);
 var encodedObject = urlParams.get('data');
 var myObject = JSON.parse(decodeURIComponent(encodedObject));
-
-console.log(myObject);
 snameData =  myObject.snameData;
 pdata = myObject.values;
 

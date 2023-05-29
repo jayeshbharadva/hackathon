@@ -1,5 +1,6 @@
 const form = document.querySelector('form');
 
+const successmsg = document.getElementById('successmsg');
 form.addEventListener('submit', async(event) => {
     event.preventDefault();
     const formData = new FormData(form);
@@ -11,16 +12,14 @@ form.addEventListener('submit', async(event) => {
         cpassword,
     }
     const responce = await login(loginobject);
+    const data = await responce.json();
     if(responce.ok){
-       const data = await responce.json();
        localStorage.setItem('companytoken',data.accesstoken);
-        if(data.msg){
-            console.log(data.msg);
-        }
-        if(data.accesstoken){
-            console.log(data.accesstoken);
-        }
         window.location.href = "hacklistcompany.html"; //set redirect to hackathon list of company
+    }
+    else{
+        console.log("user is not proper");
+        printmsg(data.msg);
     }
     }
 )
@@ -41,4 +40,10 @@ async function login(loginobject){
                 ok:false,
             };
           }
-        }
+}
+
+
+function printmsg(msg){
+    console.log("hello ");
+    successmsg.innerHTML = `<h3>${msg}</h3>`
+}

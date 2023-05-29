@@ -2,6 +2,8 @@ const token = localStorage.getItem('companytoken');
 const urlParams = new URLSearchParams(window.location.search);
 const hid = urlParams.get('hid');
 
+const student = document.getElementById("student");
+
 fetchdata();
 
 async function fetchdata(){
@@ -15,12 +17,8 @@ async function fetchdata(){
             body:JSON.stringify({hid}),
         });
         const data = await response.json();
-        console.log(data);
         var tabledata = `<ul class="student-list">`;
 
-if (!data) {
-    tabledata += "<h2>no student participated in this hackathon</h2>";
-  } else {
     // Create an array of promises for concurrent requests
     const requests = data.map(async (values) => {
       try {
@@ -56,25 +54,18 @@ if (!data) {
           </li>
         `;
       }
+      else{
+        console.log("else block");
+      }
     });
-  }
-          document.getElementById("student").innerHTML = tabledata;
+    if (results.length === 0) {
+      student.innerHTML = "<h2>no student participated in this hackathon</h2>";
+    } else {
+      student.innerHTML = tabledata;
     }
+  }
     catch{
         console.log("error in backend api call please check!!!!");
         console.log(hid);
     }
-}
-
-function showStudentDetails(snameData,values) {
-  // document.getElementById("studentName").textContent = student.name;
-  // document.getElementById("problemStatement").textContent = student.problemStatement;
-  // document.getElementById("abstract").textContent = student.abstract;
-  // document.getElementById("problemName").textContent = student.problemName;
-  // document.getElementById("firstSubmission").textContent = student.firstSubmission;
-  // document.getElementById("secondSubmission").textContent = student.secondSubmission;
-
-  // Hide student list page and show student details page
-  document.getElementById("studentListPage").style.display = "none";
-  document.getElementById("studentDetailsPage").style.display = "block";
 }
