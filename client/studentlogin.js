@@ -1,4 +1,5 @@
 const form = document.querySelector('form');
+const msg = document.getElementById('msg');
 
 form.addEventListener('submit', async(event) => {
     event.preventDefault();
@@ -12,18 +13,14 @@ form.addEventListener('submit', async(event) => {
     }
     console.log(loginobject);
     const responce = await login(loginobject);
-    console.log(responce);
+    const data = await responce.json();
     if(responce.ok){
-       const data = await responce.json();
-       console.log(data);
        localStorage.setItem('studenttoken',data.accesstoken);
-        if(data.msg){
-            console.log(data.msg);
-        }
-        if(data.accesstoken){
-            console.log(data.accesstoken);
-        }
         window.location.href = "studenthacklist.html"; //set redirect to hackathon list of company
+    }
+    else{
+        console.log("erroor msg to be printed");
+        errormsg(data.msg)
     }
     }
 )
@@ -45,3 +42,7 @@ async function login(loginobject){
             };
           }
         }
+
+function errormsg(errmsg){
+    msg.innerHTML = `<h2>${errmsg}</h2>`
+}

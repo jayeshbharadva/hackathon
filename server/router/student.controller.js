@@ -36,7 +36,6 @@ async function httplogin(req,res){
     if(!student){
         console.log("student id not registered");
         return res.status(400).json({
-            
             msg: 'StudentId is not registered'
         })
     }

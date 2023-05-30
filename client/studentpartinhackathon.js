@@ -4,15 +4,15 @@ const urlParams = new URLSearchParams(window.location.search);
 const hid = urlParams.get('hid');
 console.log(hid);
 
-function logout(){
-    // Clear user-related data or session variables
-    localStorage.removeItem('token');
-    sessionStorage.clear();
-    // ...additional data clearing if necessary
+// function logout(){
+//     // Clear user-related data or session variables
+//     localStorage.removeItem('token');
+//     sessionStorage.clear();
+//     // ...additional data clearing if necessary
     
-    // Redirect the user to the login page
-    window.location.href = 'studentlogin.html'; 
-}
+//     // Redirect the user to the login page
+//     window.location.href = 'studentlogin.html'; 
+// }
 
     const form = document.querySelector('form');
     const errorMessageContainer = document.getElementById('error-message-container');
