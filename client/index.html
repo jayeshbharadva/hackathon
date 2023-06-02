@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Selection Page</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #selection {
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    option{
+        font-style: italic;
+        font-weight: 200;
+    }
+
+    #go-button {
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+  </style>
+  <script>
+    function redirectToPage() {
+      var selection = document.getElementById("selection").value;
+      if (selection === "student") {
+        window.location.href = "studentlogin.html";
+      } else if (selection === "company") {
+        window.location.href = "companylogin.html";
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Select your role:</h1>
+  <select id="selection">
+    <option value="student">Student</option>
+    <option value="company">Company</option>
+  </select>
+  <br>
+  <button id="go-button" onclick="redirectToPage()">Go</button>
+</body>
+</html>

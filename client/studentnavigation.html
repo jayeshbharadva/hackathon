@@ -8,16 +8,30 @@
     <title>Document</title>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const logoutBtn = document.getElementById('logoutBtn');
-    logoutBtn.addEventListener('click', logout);
+    // document.addEventListener('DOMContentLoaded', function() {
+    // const lo = document.getElementById('logoutBtn');
+    // lo.addEventListener('click', logout);
 
-    function logout() {
-        localStorage.removeItem('studenttoken');
-        sessionStorage.clear();
-        window.location.href = 'studentlogin.html';
-    }
-});
+    // function logout() {
+    //     localStorage.removeItem('studenttoken');
+    //     sessionStorage.clear();
+    //     window.location.href = 'studentlogin.html';
+    // }
+// });
+
+// const lo = document.getElementById('logoutBtn');
+// lo.onclick = function(){
+//     localStorage.removeItem('studenttoken');
+//         sessionStorage.clear();
+//         window.location.href = 'studentlogin.html';
+// }
+
+function logout(){
+    console.log(localStorage.getItem('studenttoken'));
+    localStorage.removeItem('studenttoken');
+    sessionStorage.clear();
+    window.location.href = 'studentlogin.html';
+}
 
 </script>
 
@@ -107,7 +121,7 @@
         <nav>
             <a href="studentparticipated.html">participated list</a>
         </nav>
-        <button id="logoutBtn">log out</button>
+        <button id="logoutBtn" onclick="logout()">log out</button>
     </header>
 </body>
 </html>

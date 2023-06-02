@@ -2,14 +2,14 @@ const token = localStorage.getItem('studenttoken');
 
 checkAuthentication();
 
-// function logout() {
-//     // Clear user-related data or session variables
-//     localStorage.removeItem('token');
-//     sessionStorage.clear();
+function logout() {
+    // Clear user-related data or session variables
+    localStorage.removeItem('token');
+    sessionStorage.clear();
   
-//     // Redirect the user to the login page
-//     window.location.href = 'companylogin.html'; 
-// }
+    // Redirect the user to the login page
+    window.location.href = 'companylogin.html'; 
+}
 
 async function checkAuthentication() {  
     try {
