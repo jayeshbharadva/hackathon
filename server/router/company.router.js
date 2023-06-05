@@ -9,4 +9,4 @@ companyrouter.post('/',addcompany);
 companyrouter.post('/login',companylogin);
 companyrouter.get('/hacklist',validateToken, hackbycid);
 
-module.exports = {companyrouter};
+module.exports = companyrouter;

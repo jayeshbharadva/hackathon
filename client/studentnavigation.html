@@ -8,23 +8,6 @@
     <title>Document</title>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    // const lo = document.getElementById('logoutBtn');
-    // lo.addEventListener('click', logout);
-
-    // function logout() {
-    //     localStorage.removeItem('studenttoken');
-    //     sessionStorage.clear();
-    //     window.location.href = 'studentlogin.html';
-    // }
-// });
-
-// const lo = document.getElementById('logoutBtn');
-// lo.onclick = function(){
-//     localStorage.removeItem('studenttoken');
-//         sessionStorage.clear();
-//         window.location.href = 'studentlogin.html';
-// }
 
 function logout(){
     console.log(localStorage.getItem('studenttoken'));
@@ -119,7 +102,7 @@ function logout(){
             <a href="#">notification</a>
         </nav>
         <nav>
-            <a href="studentparticipated.html">participated list</a>
+            <a href="studenthackparticipated.html">participated list</a>
         </nav>
         <button id="logoutBtn" onclick="logout()">log out</button>
     </header>

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const validatetoken = async function(req,res,next){
     var token;
     let authHeader = req.headers.Authorization || req.headers.authorization;
+    console.log("companyauth");
     if(authHeader && authHeader.startsWith("Bearer")){
         token = authHeader.split(" ")[1];
         if(token == undefined){
@@ -12,7 +13,7 @@ const validatetoken = async function(req,res,next){
         }
         try{
             const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-                if(decoded.role == "Company"){
+                if(decoded.role === "Company"){
                     res.user = decoded;
                     next();
                 }

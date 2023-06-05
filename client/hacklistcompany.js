@@ -3,15 +3,6 @@ const hacktable = document.getElementById('hacktable');
 
 checkauthentication();
 
-function logout() {
-    // Clear user-related data or session variables
-    localStorage.removeItem('token');
-    sessionStorage.clear();
-  
-    // Redirect the user to the login page
-    window.location.href = 'companylogin.html'; 
-}
-
 async function checkauthentication() {  
     try {
         const response = await fetch(`http://localhost:3007/company/hacklist`, {

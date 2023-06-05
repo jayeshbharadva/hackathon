@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
 
-const {addstudent,checklogin,partinhackathon,studentinfo,students} = require("../model/student.model");
+const {addstudent,checklogin,partinhackathon,studentinfo,students,studenthackparticipated} = require("../model/student.model");
 const { hacklist } = require('../model/hackathon.model');
 
 async function httpaddstudent(req,res){
@@ -64,9 +64,7 @@ async function httphacklist(req,res){
 async function httppartinhackathon(req,res){
     const submission = req.body;
     submission.sid = res.user.sid;
-    console.log(submission);
     const sub = await partinhackathon(submission);
-    console.log(sub);
     if(!sub.ok){
         return res.status(400).json({
             msg:'error in data entry or you already participated in a hackathon with this problem statement id',
@@ -84,10 +82,17 @@ async function httpstudentinfo(req,res){
 }
 
 async function httpstudent(req,res){
+    console.log("httpstudent");
     const sid = req.params.id;
     const response = await students(sid);
-    console.log(response);
     return res.status(200).json(response);
+}
+
+async function httpstudenthackparticipated(req,res){
+    const sid = res.user.sid;
+    console.log(sid);
+    const hacks = await studenthackparticipated(sid);
+    return res.status(200).json(hacks);
 }
 
 module.exports = {
@@ -96,5 +101,6 @@ module.exports = {
     httphacklist,
     httppartinhackathon,
     httpstudentinfo,
-    httpstudent
+    httpstudent,
+    httpstudenthackparticipated
 }

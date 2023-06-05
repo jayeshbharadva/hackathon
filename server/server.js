@@ -6,8 +6,8 @@ const app = require('./app');
 require('dotenv').config();
 
 const PORT = 3007;
-// const mongo_url = "mongodb://0.0.0.0:27017/hmsdb";
-const mongo_url = 'mongodb+srv://jayesh:jayesh@hmsdb.lm6yh9l.mongodb.net/?retryWrites=true&w=majority';
+const mongo_url = "mongodb://0.0.0.0:27017/hmsdb";
+// const mongo_url = 'mongodb+srv://jayesh:jayesh@hmsdb.lm6yh9l.mongodb.net/?retryWrites=true&w=majority';
 
 const server = http.createServer(app);
 

@@ -68,7 +68,7 @@ async function students(id){
         },{
             '_id': 0,
             '__v': 0,
-        },)
+        });
     }
     catch{
         console.log('error in finding student details.check database connection');
@@ -78,10 +78,29 @@ async function students(id){
     }
 }
 
+async function studenthackparticipated(id){
+    try{
+        return await submissionschema.find({
+            sid:id,
+        },{
+            '_id': 0,
+            '__v': 0,
+        });
+    }
+    catch{
+        console.log('error in finding student details.check database connection');
+        return{
+            ok:false,
+        }
+    }
+
+}
+
 module.exports = {
     addstudent,
     checklogin,
     partinhackathon,
     studentinfo,
-    students
+    students,
+    studenthackparticipated
 }

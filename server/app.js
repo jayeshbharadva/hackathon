@@ -4,7 +4,7 @@ require('dotenv').config();
 const session = require('express-session');
 
 const app = express();
-const {companyrouter} = require("./router/company.router");
+const companyrouter = require("./router/company.router");
 const hackrouter = require("./router/hackathon.router");
 const studentrouter = require("./router/student.router");
 
@@ -19,7 +19,7 @@ app.use(session({
 app.use(cors());
 app.use(express.json());
 app.use('/company',companyrouter);
-app.use('/hack',hackrouter)
-app.use('/student',studentrouter)
+app.use('/hack',hackrouter);
+app.use('/student',studentrouter);
 
 module.exports = app;
