@@ -1,6 +1,7 @@
 const form = document.querySelector('form');
 const msg = document.getElementById('msg');
 
+
 form.addEventListener('submit', async(event) => {
     event.preventDefault();
     const formData = new FormData(form);

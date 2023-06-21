@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const validateToken = async function(req, res, next) {
+  console.log("student auth");
   let token;
   let authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith("Bearer")) {
@@ -13,7 +14,7 @@ const validateToken = async function(req, res, next) {
 
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-      
+      console.log(decoded.role);
       if (decoded.role === "Student") {
         res.user = decoded;
         next();

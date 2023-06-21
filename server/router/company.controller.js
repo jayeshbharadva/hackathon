@@ -70,9 +70,15 @@ async function hackbycid(req,res){
     });
 }
 
+function httpreturnname(req,res){
+    const cname = res.user.cname;
+    return res.status(200).json(cname);
+}
+
 module.exports ={
     companylist,
     addcompany,
     companylogin,
     hackbycid,
+    httpreturnname
 }

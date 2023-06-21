@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const validatetoken = async function(req,res,next){
+    console.log("company auth");
     var token;
     let authHeader = req.headers.Authorization || req.headers.authorization;
     console.log("companyauth");

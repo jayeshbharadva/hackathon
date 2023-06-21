@@ -1,4 +1,8 @@
 const token = localStorage.getItem('companytoken');
+if(!token){
+    window.location.href = "companylogin.html";
+}
+
 const hacktable = document.getElementById('hacktable');
 
 checkauthentication();
@@ -42,6 +46,7 @@ async function checkauthentication() {
             const results = await Promise.all(promises);
 
             results.forEach((result) => {
+                console.log(result);
                 const { values, participantsCount } = result;
                 let date = values.hdates.aldate;
                 date = date.split('T');

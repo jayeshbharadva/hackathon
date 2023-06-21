@@ -1,15 +1,5 @@
 const token = localStorage.getItem('studenttoken');
-
 checkAuthentication();
-
-function logout() {
-    // Clear user-related data or session variables
-    localStorage.removeItem('token');
-    sessionStorage.clear();
-  
-    // Redirect the user to the login page
-    window.location.href = 'companylogin.html'; 
-}
 
 async function checkAuthentication() {  
     try {
@@ -17,11 +7,10 @@ async function checkAuthentication() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + token,
             }
         });
         const data = await response.json();
-        console.log(data);
         
         let tableData = '';
         if (!data) {

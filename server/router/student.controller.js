@@ -95,6 +95,12 @@ async function httpstudenthackparticipated(req,res){
     return res.status(200).json(hacks);
 }
 
+function httpreturnname(req,res){
+    const sname = res.user.sname;
+    console.log("name is ",sname);
+    return res.status(200).json(sname);
+}
+
 module.exports = {
     httpaddstudent,
     httplogin,
@@ -102,5 +108,6 @@ module.exports = {
     httppartinhackathon,
     httpstudentinfo,
     httpstudent,
-    httpstudenthackparticipated
+    httpstudenthackparticipated,
+    httpreturnname
 }
