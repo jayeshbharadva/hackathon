@@ -1,28 +1,59 @@
-const upload = require('express-fileupload');
+const multer = require("multer");
+const fs = require("fs");
+const { google } = require('googleapis');
+
+const authenticateGoogle = require('../middleware/googledriveauth');
+const uploadToGoogleDrive = async (file, auth,filename) => {
+    const fileMetadata = {
+      name: filename,
+      parents: ["1XY7ETmo44ycEFUclwuUAXIgjEeE5VGL6"], // Change it according to your desired parent folder id
+    };
+  
+    const media = {
+      mimeType: file.mimetype,
+      body: fs.createReadStream(file.path),
+    };
+  
+    const driveService = google.drive({ version: "v3", auth });
+  
+    const response = await driveService.files.create({
+      requestBody: fileMetadata,
+      media: media,
+      fields: "id, webViewLink",
+    });
+    const {id,webViewLink} = response.data;
+    return {id,webViewLink};
+  };
+
 
 const {hacklist,addhack,hackbyparamid} = require('../model/hackathon.model')
+
 async function httphacklist(req,res){
+    console.log("hacklist funcyion called");
     return res.status(200).json(await hacklist());
 }
 
 async function httpaddhack(req,res){
-    console.log(req);
-    console.log(req.file);
     const hackd = req.body;
     const file = req.file;
-    console.log(file);
-    if (!file) {
-        return res.status(400).send('No files were uploaded.');
-    }
-    const filename = res.user.cid +"_"+hackd.hid;
-    file.mv(`../uploads/${filename}`, (err) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    });
     hackd.cid = res.user.cid;
-    addhack(hackd);
-    return res.json(hackd);
+    console.log(hackd);
+    const filename = res.user.cid +"_"+hackd.hid;
+    console.log(file);
+
+    // //code to upload file to google drive
+    const auth = authenticateGoogle();
+    const {webViewLink} = await uploadToGoogleDrive(file,auth,filename);
+    // const url = responsefromdrive.webViewLink;
+    // hackd.hpfile = url;
+    console.log(webViewLink);
+    hackd.hpfile = webViewLink;
+    const resp = await addhack(hackd);
+    console.log(resp.ok);
+    console.log("hey there this is nmy");
+    return res.json({
+        msg: "uploaded successfully",
+    });
 }
 
 async function httphackbyparamid(req,res){

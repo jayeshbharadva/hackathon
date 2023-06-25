@@ -6,14 +6,7 @@ async function httpcompanylist(){
 }
 
 async function httpaddcompany(company){
-    // return await companyschema.create(company);
-    return await companyschema.updateOne({
-        cid:company.cid,
-    },{
-        $set : company,
-    },{
-        upsert : true,
-    })
+    return await companyschema.create(company);
 }
 
 async function httpchecklogin(id){

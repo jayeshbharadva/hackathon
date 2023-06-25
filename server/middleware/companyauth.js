@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 const validatetoken = async function(req,res,next){
-    console.log("company auth");
+    let count = 0;
     var token;
     let authHeader = req.headers.Authorization || req.headers.authorization;
-    console.log("companyauth");
+    console.log("companyauth"+"count is"+ count);
     if(authHeader && authHeader.startsWith("Bearer")){
         token = authHeader.split(" ")[1];
         if(token == undefined){

@@ -13,12 +13,12 @@ form.addEventListener('submit', async(event) => {
     }
     const responce = await login(loginobject);
     const data = await responce.json();
+    console.log(data);
     if(responce.ok){
        localStorage.setItem('companytoken',data.accesstoken);
         window.location.href = "hacklistcompany.html"; //set redirect to hackathon list of company
     }
     else{
-        console.log("user is not proper");
         printmsg(data.msg);
     }
     }

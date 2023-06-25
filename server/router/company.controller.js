@@ -11,13 +11,19 @@ async function companylist(req,res){
 
 async function addcompany(req,res){
     const companyd = req.body;
+    const resp = await httpchecklogin(companyd.cid);
+    if(resp){
+        return res.status(400).json({
+            msg:"User already exists with same companyId!! please enter different companyId",
+        })
+    }
     if(!companyd.cid || !companyd.cemail || !companyd.cpassword || !companyd.cname){
         return res.status(400).json({
             msg: "please enter all the mendetory details",
         })
     }
     companyd.cpassword = await bcrypt.hash(companyd.cpassword, 10);
-    httpaddcompany(companyd);
+    await httpaddcompany(companyd);
     return res.status(201).json(companyd);
 }
 
@@ -58,6 +64,7 @@ async function companylogin(req,res){
 }
 
 async function hackbycid(req,res){
+    console.log("hackbycid function is called");
     const id = res.user.cid;
     const hack = await httphackbycid(id);
     if(hack.length == 0){

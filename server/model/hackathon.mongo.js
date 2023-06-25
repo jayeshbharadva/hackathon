@@ -28,7 +28,7 @@ const hackschema = mongoose.Schema({
     },
     hlevel:{
         type: String,
-        required: true,
+        required: false,
     },
     hprize:{
         type: String,
@@ -67,11 +67,11 @@ const hackschema = mongoose.Schema({
     hteamsize:{
         htmax:{
             type: Number,
-            required: true,
+            required: false,
         },
         htmin:{
             type: Number,
-            required: true,
+            required: false,
         }
     }
 });

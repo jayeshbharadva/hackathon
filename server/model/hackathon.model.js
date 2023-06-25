@@ -5,11 +5,19 @@ async function hacklist(){
 }
 
 async function addhack(hack){
+    console.log("addhack is called");
     try{
         await hackschema.create(hack);
+        return{
+            ok: true,
+        }
     }
     catch(err){
-        console.log('some error in posting the data');
+        console.log('some error in posting the data'+" "+err);
+        return{
+            ok:false,
+            err:err,
+        }
     }
 }
 

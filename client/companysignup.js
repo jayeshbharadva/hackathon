@@ -17,12 +17,14 @@ const formDataObject = {
     cdescription
   };
   const response = await savelogindata(formDataObject);
+  const data = await response.json();
   if(response.ok){
       console.log("data added");
       window.location.href="companylogin.html";
     }
     else{
       console.log("responce is false");
+      printmsg(data.msg);
     }
 });
 
@@ -42,4 +44,8 @@ async function savelogindata(dataobject){
             ok:false,
         };
       }
+}
+function printmsg(msg){
+  console.log("hello ");
+  successmsg.innerHTML = `<h3>${msg}</h3>`
 }

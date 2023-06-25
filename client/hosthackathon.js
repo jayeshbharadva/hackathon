@@ -38,40 +38,40 @@ form.addEventListener('submit', async (event) => {
 
   const file = hpfile.files[0];
 
-  if (endDate <= startDate) {
-    alert('End date should be after the start date.');
-    return; // Stop form submission
-  }
+  // if (endDate <= startDate) {
+  //   alert('End date should be after the start date.');
+  //   return; // Stop form submission
+  // }
 
-  if (submissionStartDate < startDate || submissionStartDate > endDate) {
-    alert('Submission start date should be between the start and end dates.');
-    return; // Stop form submission
-  }
+  // if (submissionStartDate < startDate || submissionStartDate > endDate) {
+  //   alert('Submission start date should be between the start and end dates.');
+  //   return; // Stop form submission
+  // }
 
-  if (submissionEndDate < startDate || submissionEndDate > endDate) {
-    alert('Submission end date should be between the start and end dates.');
-    return; // Stop form submission
-  }
+  // if (submissionEndDate < startDate || submissionEndDate > endDate) {
+  //   alert('Submission end date should be between the start and end dates.');
+  //   return; // Stop form submission
+  // }
 
-  if (!(submissionEndDate > submissionStartDate)) {
-    alert('Submission end date should be greater than submission start date');
-    return;
-  }
+  // if (!(submissionEndDate > submissionStartDate)) {
+  //   alert('Submission end date should be greater than submission start date');
+  //   return;
+  // }
 
-  if (!(resultDate > endDate)) {
-    alert('result date should be after end date');
-    return;
-  }
+  // if (!(resultDate > endDate)) {
+  //   alert('result date should be after end date');
+  //   return;
+  // }
 
-  if (htmax <= 0 || htmin <= 0) {
-    alert('team size can not be negative');
-    return;
-  }
+  // if (htmax <= 0 || htmin <= 0) {
+  //   alert('team size can not be negative');
+  //   return;
+  // }
 
-  if (htmax <= htmin) {
-    alert('maximum team size should be greater than minimum');
-    return;
-  }
+  // if (htmax <= htmin) {
+  //   alert('maximum team size should be greater than minimum');
+  //   return;
+  // }
 
   // Create a FormData object
   var formData = new FormData();
@@ -95,12 +95,14 @@ form.addEventListener('submit', async (event) => {
   console.log(hpfile.files.length);
   const response = await savehackdata(formData);
   console.log(response);
-  if (response.ok) {
-    console.log('data added');
-    window.location.href = 'hacklistcompany.html';
-  } else {
-    console.log('response is false');
-  }
+  // console.log(await response.json());
+
+  // if (response.ok) {
+  //   console.log('data added');
+  //   // window.location.href = 'hacklistcompany.html';
+  // } else {
+  //   console.log('response is false');
+  // }
 });
 
 async function savehackdata(formData) {

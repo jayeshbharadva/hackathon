@@ -62,7 +62,7 @@ async function hackdetails() {
                     </tr>
                     <tr>
                         <td>
-                            <nav><a href="#">Click here</a></nav>
+                            <nav><a href="${res.hpfile}">Click here</a></nav>
                             to download the problem statement file.
                         </td>
                     </tr>
