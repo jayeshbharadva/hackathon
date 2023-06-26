@@ -28,10 +28,17 @@ async function hackbyparamid(id){
 async function httphackbycid(id){
     return await hackschema.find({cid: id},{'_id': 0, '__v': 0});
 }
+// it returns the hackathon which has already this id
+async function checkifhackexist(hid,cid){
+    return await hackschema.find(
+        {cid:cid,hid:hid},{'_id': 0, '__v': 0},
+    )
+}
 
 module.exports = {
     hacklist,
     addhack,
     hackbyparamid,
-    httphackbycid
+    httphackbycid,
+    checkifhackexist
 }

@@ -76,4 +76,6 @@ const hackschema = mongoose.Schema({
     }
 });
 
+hackschema.index({ cid: 1, hid: 1}, { unique: true });
+
 module.exports = mongoose.model('hacklist', hackschema);

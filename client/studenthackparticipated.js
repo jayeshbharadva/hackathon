@@ -22,34 +22,47 @@ async function checkAuthentication() {
         });
         const data = await response.json();
         console.log(data);
-        
         let tableData = '';
         if (!data) {
             console.log('No data available');
         } else {
-            data.map((values) => {
-                let date = values.hdates.aldate;
-                date = date.split('T');
-                date = date[0];
-                tableData += `
-                    <div class="column" onclick="redirectToPage('hackathon-details.html?hid=${values.hid}')">
-                        <span>${values.hlevel}</span>
-                        <span>${values.hname}</span>
-                        <div>
-                            <span class="info-hack">${date}</span>
-                            <span class="info-hack">${values.htech}</span>
-                        </div>
-                    </div>
-                    <hr>
-                `;
+            const promises = data.map(async (values)=>{
+                const hid = values.hid;
+                try{
+                    const hackdetail = await fetch(`http://localhost:3007/hack/hackbyid`,{
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": 'Bearer ' + token
+                        },
+                        body: JSON.stringify({ hid }),
+                    });
+                    var detail = await hackdetail.json();
+                    console.log(detail);
+                    return{
+                        detail,values
+                    };
+                }
+                catch(err){
+                    console.log("some eroor occured while fetching data");
+                    return{
+                        ok: false,
+                        msg:'some eroor occured while fetching data',
+                    }
+                }
             });
-            document.getElementById('hacktable').innerHTML = tableData;
-        }    
-    } catch (err) {
-        console.log(err);
+
+            const results = await Promise.all(promises);
+
+            results.forEach((data)=>{
+                // console.log(data);
+            })
+}
+    }
+    catch(error){
+        console.log("error in data fetch");
     }
 }
-
 function redirectToPage(pageUrl) {
     window.location.href = pageUrl;
 }

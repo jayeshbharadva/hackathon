@@ -1,5 +1,7 @@
 const token = localStorage.getItem('companytoken');
 
+const successmsg = document.getElementById('successmsg');
+
 function logout() {
   // Clear user-related data or session variables
   localStorage.removeItem('token');
@@ -92,17 +94,14 @@ form.addEventListener('submit', async (event) => {
   formData.append('hteamsize[htmax]', htmax);
   formData.append('hteamsize[htmin]', htmin);
 
-  console.log(hpfile.files.length);
   const response = await savehackdata(formData);
-  console.log(response);
-  // console.log(await response.json());
+  const data = await response.json();
 
-  // if (response.ok) {
-  //   console.log('data added');
-  //   // window.location.href = 'hacklistcompany.html';
-  // } else {
-  //   console.log('response is false');
-  // }
+  if (response.ok) {
+    window.location.href = 'hacklistcompany.html';
+  } else {
+    printmsg(data.msg);
+  }
 });
 
 async function savehackdata(formData) {
@@ -115,10 +114,13 @@ async function savehackdata(formData) {
       body: formData,
     });
   } catch (err) {
-    console.log('error in data store');
     return {
       ok: false,
       err: err.msg,
     };
   }
+}
+
+function printmsg(msg){
+  successmsg.innerHTML = `<h3>${msg}</h3>`
 }

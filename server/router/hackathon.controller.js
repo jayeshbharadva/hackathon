@@ -1,8 +1,12 @@
-const multer = require("multer");
 const fs = require("fs");
 const { google } = require('googleapis');
 
+
+const {hacklist,addhack,hackbyparamid,checkifhackexist} = require('../model/hackathon.model');
+
 const authenticateGoogle = require('../middleware/googledriveauth');
+
+
 const uploadToGoogleDrive = async (file, auth,filename) => {
     const fileMetadata = {
       name: filename,
@@ -26,10 +30,8 @@ const uploadToGoogleDrive = async (file, auth,filename) => {
   };
 
 
-const {hacklist,addhack,hackbyparamid} = require('../model/hackathon.model')
 
 async function httphacklist(req,res){
-    console.log("hacklist funcyion called");
     return res.status(200).json(await hacklist());
 }
 
@@ -37,20 +39,25 @@ async function httpaddhack(req,res){
     const hackd = req.body;
     const file = req.file;
     hackd.cid = res.user.cid;
-    console.log(hackd);
+    const hackinfo = await checkifhackexist(hackd.hid,hackd.cid);
+    if(hackinfo){
+        return res.status(400).json({
+            msg:"Hack already exists, update in that hack or create with different ID",
+        })
+    }
+
     const filename = res.user.cid +"_"+hackd.hid;
-    console.log(file);
 
     // //code to upload file to google drive
     const auth = authenticateGoogle();
     const {webViewLink} = await uploadToGoogleDrive(file,auth,filename);
-    // const url = responsefromdrive.webViewLink;
-    // hackd.hpfile = url;
-    console.log(webViewLink);
+    if(!webViewLink){
+        return res.status(400).json({
+            msg: "error occured!! try after some time or refresh the page"
+        })
+    }
     hackd.hpfile = webViewLink;
     const resp = await addhack(hackd);
-    console.log(resp.ok);
-    console.log("hey there this is nmy");
     return res.json({
         msg: "uploaded successfully",
     });
@@ -72,8 +79,22 @@ async function httphackbyparamid(req,res){
     return res.status(200).json(hack);
 }
 
+async function httphackbyhid(req,res){
+    const hackid = req.body.hid;
+    console.log(hackid);
+    const hack = await hackbyparamid(hackid);
+    console.log(hack);
+    if(!hack){
+        return res.status(400).json({
+            msg: "hackathon not found",
+        })
+    }
+    return res.status(200).json(hack);
+}
+
 module.exports = {
     httphacklist,
     httpaddhack,
     httphackbyparamid,
+    httphackbyhid,
 }
